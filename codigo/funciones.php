@@ -18,18 +18,18 @@ function error($c, $num)        //Funcion para ver errores en funciones mysqli, 
 function login()
 {
     //Funcion para iniciar sessiones de administrador (Parte1) o usuario (Parte2)
-    
+
     //*Parte1*\\
 
     //Claves del Administrador
-        //Nombre: "administrador"
-        //Contraseña: "123456"
+    //Nombre: "administrador"
+    //Contraseña: "123456"
 
     if ($_POST['nombre'] == "administrador" && $_POST['password'] == "123") {
         echo "<h1>Eres Administrador</h1>";
         $_SESSION['tipo'] = "admin";
         $_SESSION['nombre'] = "Administrador";
-    } 
+    }
 
     //*Parte2*\\
     else {
@@ -39,7 +39,7 @@ function login()
         $clave = $_POST['password'];
 
         conectar($c); //Llamada funcion de conectar
-        
+
         mysqli_select_db($c, "feliz");
         $sql = "SELECT * FROM clientes";
 
@@ -64,24 +64,24 @@ function login()
 }
 
 function conectar(&$c)
-{  
+{
     //Funcion para conectar en todas las consultas de Mysqli, El unico parametro de salida es la coneccion
     //Requiere "session_start();"
     $host = "localhost";
 
     //Existe la session tipo (Hay un usuario logeado)
     //y la session vale "admin" (El usuairo es de tipo admin)
-    if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == "admin") { 
+    if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == "admin") {
         $usuar = "administrador";
         $clave = "123456";
     } else {
-        
+
         //No hay un admin conectado, da igual que se este log o no
 
         $usuar = "usuapp";
         $clave = "";
     }
-    if ($c = mysqli_connect($host, $usuar, $clave)) {   
+    if ($c = mysqli_connect($host, $usuar, $clave)) {
         //Posible conectar
     } else {
         echo "Imposible conectar";
@@ -105,7 +105,7 @@ function crearbd()
 {
     conectar($c);
     deletebd(); //Borrar BD si existe
-    
+
     //Crear BD
     $bd = "CREATE DATABASE IF NOT EXISTS Feliz";
 
@@ -153,7 +153,7 @@ function crearbd()
                 echo "<br>Tabla 2 Creada<br>";
                 if (mysqli_query($c, $tabla3)) {
                     echo "<br>Tabla3 Creada<br>";
-                } else {//errores
+                } else { //errores
                     error($c, mysqli_errno($c));
                 }
             } else {
