@@ -1,4 +1,74 @@
 <?php
+session_start();
+
+function loginUsuario(&$mensaje)
+{
+    $nombre=$_POST["nombre"];
+    $password=$_POST["password"];
+    $mensaje="";
+    if($nombre == "administrador")
+    {
+        if( $password == "123456")
+        {
+            $mensaje="Sesion iniciada con $nombre";
+            $_SESSION["tipo"]="admin";
+            setcookie("nombre",$nombre,time()+3600,"/");
+            $contador++;
+        }
+        else
+        {
+            $mensaje="Contraseña incorrecta, prueba con 123456";
+
+        }
+    }
+    else
+    {
+        $host = "localhost";
+        $usuar = "administrador";
+        $clave = "123456";
+        $mensaje="Sesion no iniciada";
+        if ($c = mysqli_connect($host, $usuar, $clave)) 
+        {
+            echo "vacio";
+        }
+        else 
+        {
+            echo "Imposible conectar";
+           
+        }
+        $base="Feliz"; 
+        $tabla="Clientes"; 
+        mysqli_select_db($c, $base); 
+        $usuarios=mysqli_query($c, "SELECT NombreCliente FROM  Clientes");
+        foreach($usuarios as $Columna=>$datos)
+        {  
+            foreach($datos as $dato=>$informacion)
+            {
+                if("$nombre"=="$informacion")
+                {
+                    $mensaje="$mensaje $informacion";
+                    setcookie("nombre",$nombre,time()+3600,"/");
+                    $mensaje="Sesion iniciada con $nombre";
+                    $contador++;
+                }
+                else
+                {
+                    $mensaje="El usuario $nombre no existe";
+                }
+            }
+        }
+    }
+    echo "$mensaje";   
+    header("Location: principal.php");   
+}
+
+function cerrarsesion()
+{
+    session_destroy();
+    setcookie("nombre","",time()-1,"/");
+    header("Location: ../index.html");  
+
+}
 
 
 function error($c, $num)
@@ -14,12 +84,6 @@ function error($c, $num)
     } else {
         echo "Error desconocido: " . mysqli_errno($c);
     }
-}
-
-function deslog()
-{
-    session_destroy();
-    echo "<h1>Session Cerrada</h1>";
 }
 
 function conectar(&$c)
@@ -109,3 +173,4 @@ function crearbd()
         error($c, mysqli_errno($c));
     }
 }
+?>
