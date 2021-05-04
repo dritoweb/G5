@@ -1,87 +1,111 @@
 <?php
 
-function login()
+
+function error($c, $num)
 {
+    $vec["1064"] = "<br>Error de sintaxis<br>";
+    $vec['1046'] = "<br>Base de datos no seleccionada<br>";
+    $vec['1062'] = "<br>Este usuario ya existe<br>";
+    $vec['1146'] = "<br>Esta tabla no existe<br>";
+    $vec['1054'] = "<br>Falta algun campo en las tablas";
 
-    $nombre = $_POST['nombre'];
-    $contra = $_POST['contra'];
-
-    $conn = mysqli_connect("localhost", "adminapp", "123", "bd_tragaperras");
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-    $resultado = mysqli_query($conn, "SELECT Nombre FROM usuarios");
-    if ($nombre == "adminapp" && $contra == "123") {
-        $_SESSION['admin'] = "$nombre";
+    if (isset($vec[$num])) {
+        echo $vec[$num];
     } else {
-
-        while ($registro = mysqli_fetch_row($resultado)) {
-
-            foreach ($registro  as $clave) {
-                if ($nombre == $clave) {
-                    $_SESSION['usua'] = "$nombre";
-                    if ($clave == ) {
-                        # code...
-                    }
-                }
-            }
-        }
-
-
-        header("Refresh:1; url= ../index.php?administrador");
+        echo "Error desconocido: " . mysqli_errno($c);
     }
 }
 
-function cerrarsesion()
+function deslog()
 {
-
     session_destroy();
-    header("Refresh:1; url= ../index.php?administrador");
+    echo "<h1>Session Cerrada</h1>";
 }
 
-function altabd()
+function conectar(&$c)
 {
-
-    $nombre = $_POST["nombre"];
-    $contra = $_POST["contra"];
-    $edad = $_POST["edad"];
-    $sexo = $_POST["sexo"];
-
-    $conn = mysqli_connect("localhost", "adminapp", "123", "bd_tragaperras");
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-    $sql = "INSERT INTO usuarios (NomUsu, PassworUsu, Edad, Sexo, Puntos)
-    VALUES ('$nombre', '$contra', '$edad' ,'$sexo','0')";
-
-    if (mysqli_query($conn, $sql)) {
-        echo "New record created successfully";
+    $host = "localhost";
+    // if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == "admin") {
+        $usuar = "administrador";
+        $clave = "123456";
+    // } else {
+    //     $usuar = "usuapp";
+    //     $clave = "";
+    // }
+    if ($c = mysqli_connect($host, $usuar, $clave)) {
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        echo "Imposible conectar";
+        exit();
     }
-    mysqli_close($conn);
-    header("Refresh:1; url= ../formularios/datos.php");
 }
 
-function bajabd()
+function deletebd()
 {
-
-    $nombre = $_SESSION['usua'];
-
-    $conn = mysqli_connect("localhost", "adminapp", "123", "bd_tragaperras");
-    $id = mysqli_query($conn, "SELECT IdUsu FROM usuarios WHERE NomUsu = '$nombre'");
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
+    $sql = "DROP DATABASE IF EXISTS Feliz";
+    conectar($c);
+    if (mysqli_query($c, $sql)) {
+        echo "<br>Base de datos eliminada<br>";
+    } else {
+        error($c, mysqli_errno($c));
     }
-
-        if ($delete = mysqli_query($conn, "DELETE FROM usuarios WHERE IdUsu = '$id' and NomUsu like '$nombre'")) {
-            echo "$nombre se ha eliminado de la base";
-            header("Refresh:1; url= ../index.php");
-        } else {
-            echo "No se ha podido dar de baja, compruebe los datos e intentelo de nuevo";
-        }
-        echo $id;
-    mysqli_close($conn);
-    //header("Refresh:1; url= ../index.php");
 }
-?>
+
+function crearbd()
+{
+    conectar($c);
+    deletebd();
+
+    $bd = "CREATE DATABASE IF NOT EXISTS Feliz";
+    $tabla1 = "CREATE TABLE if not exists Animadores(
+        IdAnimador VARCHAR(9) UNIQUE,
+        NombreAnimador VARCHAR(35),
+        Especialidad VARCHAR(20) PRIMARY KEY,
+        precio INT
+        );";
+
+    $tabla2 = "CREATE TABLE IF NOT EXISTS Clientes(
+        IdCliente INT AUTO_INCREMENT PRIMARY KEY,
+        NombreCliente VARCHAR(25),
+        Direccion VARCHAR(35),
+        Email VARCHAR(25),
+        Contraseña VARCHAR(30)
+        );";
+
+    $tabla3 = "CREATE TABLE IF NOT EXISTS Fiesta(
+        IdFiesta INT,
+        fecha DATE,
+        Especialidad VARCHAR(20),
+        Duracion INT,
+        TipoDeFiesta VARCHAR(20),
+        Numero VARCHAR(9),
+        EdadMedia INT,
+        Importe INT,
+        IdCliente INT,
+        FOREIGN KEY (Especialidad) REFERENCES Animadores(Especialidad),
+        FOREIGN KEY (IdCliente) REFERENCES Clientes(IdCliente),
+        PRIMARY KEY(Fecha, Especialidad)
+        );";
+
+
+    if (mysqli_query($c, $bd)) {
+        echo "<br>Base de datos creada<br>";
+        mysqli_select_db($c, "Tragaperras");
+        if (mysqli_query($c, $tabla1)) {
+            echo "<br>Tabla1 Creada<br>";
+            if (mysqli_query($c, $tabla2)) {
+                echo "<br>Tabla 2 Creada<br>";
+                if (mysqli_query($c, $tabla3)) {
+                    echo "<br>Tabla3 Creada<br>";
+                }else {
+                    error($c, mysqli_errno($c));
+                }
+            }else {
+                error($c, mysqli_errno($c));
+            }
+        }else {
+            error($c, mysqli_errno($c));
+        }
+    }else {
+        error($c, mysqli_errno($c));
+    }
+}
