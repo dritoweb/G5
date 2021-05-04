@@ -1,7 +1,6 @@
 <?php
 include("funciones.php");
 
-<<<<<<< HEAD
 if(isset($_GET['loginUsuario'])){
     loginUsuario($mensaje);
 }
@@ -67,12 +66,3 @@ if(isset($_GET['cerrarsesion'])){
         <script src="../js/scripts.js"></script>
     </body>
 </html>
-=======
-// if(isset($_GET['loginUsuario'])){
-//     loginUsuario();
-// }
-// if(isset($_GET['altaUsuario'])){
-//     altaUsuario();
-// }
-?>
->>>>>>> d4af7e9cba6f024025337d3183fcee67df8d65c3
