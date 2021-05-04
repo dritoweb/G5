@@ -32,15 +32,16 @@
         <header class="masthead text-center text-white">
             <div class="masthead-content">
                 <div class="container d-flex  flex-wrap justify-content-around ">
-                  <h2 class="masthead-subheading mb-5 col-12 ">Alta Animador</h2>
-                  <form class="col-4" action="../codigo/principal.php?altaUsuario" method="POST" >
-                    <div class="">
-                        <label for="exampleInputEmail1" class="form-label">Nombre Animador</label>
-                        <input type="nombre" name="nombre" class="form-control" id="nombre-cliente" placeholder="Indiana Jones" aria-describedby="nombre-cliente">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Enviar</button>
-                  </form>
+                    <h2 class="masthead-subheading mb-5 col-12 ">Alta Animador</h2>
+                    <form class="col-4" action="../codigo/principal.php?altaUsuario" method="POST" >
+                        <div class="">
+                            <label for="exampleInputEmail1" class="form-label">Nombre Animador</label>
+                            <input type="nombre" name="nombre" class="form-control" id="nombre-cliente" placeholder="Indiana Jones" aria-describedby="nombre-cliente">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Enviar</button>
+                    </form>
                 </div>
+            </div>
         </header>
 
         <!-- Footer-->

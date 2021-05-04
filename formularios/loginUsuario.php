@@ -31,18 +31,18 @@
         <header class="masthead text-center text-white">
             <div class="masthead-content">
                 <div class="container d-flex  flex-wrap justify-content-around ">
-                  <h2 class="masthead-subheading mb-5 col-12 ">Login</h2>
-                  <form class="col-4" action="../codigo/principal.php?loginUsuario" method="POST" >
-                    <div class="">
-                        <label for="exampleInputEmail1" class="form-label">Nombre Cliente</label>
-                        <input type="nombre" name="nombre" class="form-control" id="nombre-cliente" placeholder="Indiana Jones" aria-describedby="nombre-cliente">
-                    </div>
-                    <div class="">
-                      <label for="exampleInputEmail1" class="form-label">Password:</label>
-                      <input type="password" name="password" class="form-control" id="exampleInputEmail1" placeholder="123-A" aria-describedby="emailHelp">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Enviar</button>
-                  </form>
+                    <h2 class="masthead-subheading mb-5 col-12 ">Login</h2>
+                    <form class="col-4" action="../codigo/principal.php?loginUsuario" method="POST" >
+                        <div class="">
+                            <label for="exampleInputEmail1" class="form-label">Nombre Cliente</label>
+                            <input type="nombre" name="nombre" class="form-control" id="nombre-cliente" placeholder="Indiana Jones" aria-describedby="nombre-cliente">
+                        </div>
+                        <div class="">
+                            <label for="exampleInputEmail1" class="form-label">Password:</label>
+                            <input type="password" name="password" class="form-control" id="exampleInputEmail1" placeholder="123-A" aria-describedby="emailHelp">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Enviar</button>
+                    </form>
                 </div>
         </header>
 
