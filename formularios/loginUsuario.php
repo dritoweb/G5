@@ -23,8 +23,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="#!">Sign Up</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Log In</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../">Volver</a></li>
                     </ul>
                 </div>
             </div>
@@ -32,26 +31,18 @@
         <header class="masthead text-center text-white">
             <div class="masthead-content">
                 <div class="container d-flex  flex-wrap justify-content-around ">
-                  <h2 class="masthead-subheading mb-5 col-12 ">Registro</h2>
-                  <form class="col-4" action="../codigo/principal.php?altaUsuario" method="POST" >
-                    <div class="">
-                        <label for="exampleInputEmail1" class="form-label">Nombre Cliente</label>
-                        <input type="nombre" name="nombre" class="form-control" id="nombre-cliente" placeholder="Indiana Jones" aria-describedby="nombre-cliente">
-                    </div>
-                    <div class="">
-                        <label for="exampleInputEmail1" class="form-label">Email</label>
-                        <input type="email" name="email"  class="form-control" id="email" placeholder="usuario@gmail.com" aria-describedby="emailHelp">
-                    </div>
-                    <div class="">
-                      <label for="exampleInputEmail1" class="form-label">Password:</label>
-                      <input type="password" name="password" class="form-control" id="exampleInputEmail1" placeholder="123-A" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-2">
-                        <label for="exampleInputEmail1" class="form-label">Direccion</label>
-                        <input type="direccion" name="direccion" class="form-control" id="direccion" placeholder="C/Porcino Nº 5" aria-describedby="direccion">
-                    </div >
-                    <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Enviar</button>
-                  </form>
+                    <h2 class="masthead-subheading mb-5 col-12 ">Login</h2>
+                    <form class="col-4" action="../codigo/principal.php?loginUsuario" method="POST" >
+                        <div class="">
+                            <label for="exampleInputEmail1" class="form-label">Nombre Cliente</label>
+                            <input type="nombre" name="nombre" class="form-control" id="nombre-cliente" placeholder="Indiana Jones" aria-describedby="nombre-cliente">
+                        </div>
+                        <div class="">
+                            <label for="exampleInputEmail1" class="form-label">Password:</label>
+                            <input type="password" name="password" class="form-control" id="exampleInputEmail1" placeholder="123-A" aria-describedby="emailHelp">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Enviar</button>
+                    </form>
                 </div>
         </header>
 
