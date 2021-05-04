@@ -2,9 +2,9 @@
 session_start();
 include("funciones.php");
 
-// if(isset($_GET['loginUsuario'])){
-//     loginUsuario($mensaje);
-// }
+if (isset($_GET['loginUsuario'])) {
+    loginUsuario($mensaje);
+}
 // if(isset($_GET['altaUsuario'])){
 //     altaUsuario();
 // }
@@ -13,7 +13,7 @@ include("funciones.php");
 // }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8" />
@@ -36,18 +36,23 @@ include("funciones.php");
     <?php
     include("../formularios/header.php");
     ?>
+    <header class="masthead text-center text-white">
+        <?php
+        echo "$mensaje";
+        ?>
+    </header>
 
-    <!-- Footer-->
-    <footer style="background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%)" class="py-5 bg-black ">
-        <div class="container">
-            <p class="m-0 text-center text-white small">Copyright &copy; G5 Website 2021</p>
-        </div>
-    </footer>
-    <!-- Bootstrap core JS-->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="../js/scripts.js"></script>
+        <!-- Footer-->
+        <footer style="background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%)" class="py-5 bg-black ">
+            <div class="container">
+                <p class="m-0 text-center text-white small">Copyright &copy; G5 Website 2021</p>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="../js/scripts.js"></script>
 </body>
 
 </html>

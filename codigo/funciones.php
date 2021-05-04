@@ -57,8 +57,7 @@ function loginUsuario(&$mensaje)
             }
         }
     }
-    echo "$mensaje";   
-    header("Location: principal.php");   
+    // header("Location: principal.php");   
 }
 
 function cerrarsesion()
