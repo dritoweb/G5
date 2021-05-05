@@ -35,7 +35,8 @@ function loginUsuario(&$mensaje)
             {
                 if("$nombre"=="$informacion")
                 {
-                    setcookie("nombre",$nombre,time()+3600,"/");
+                    $_SESSION["tipo"]="usuario";
+                    $_SESSION['nombre']="$nombre";
                     $mensaje="Sesion iniciada con $nombre";
                     $contador++;
                 }
@@ -52,7 +53,7 @@ function loginUsuario(&$mensaje)
 function cerrarsesion()
 {
     session_destroy();
-    header("Location: ../index.html");  
+    header("Location: ../index.php");  
 }
 
 function error($c, $num)        //Funcion para ver errores en funciones mysqli, para llamarla pasar coneccion y mysqli_errno($c)
@@ -204,4 +205,47 @@ function animadores2(&$vec)
 
     $sql = "SELECT CONCAT(NombreAnimador, ' - ', Especialidad) FROM animadores";
     $vec = mysqli_query($c, $sql);
+   
 }
+function consultarfiesta(&$mensaje)
+{
+    conectar($c);
+    mysqli_select_db($c, "feliz");
+    $mensaje="";
+    $nombre=$_SESSION["nombre"];
+
+    $sql = "SELECT IdCliente FROM `clientes` WHERE NombreCliente LIKE '$nombre'";
+    $vec = mysqli_query($c, $sql);
+    foreach ($vec as $key => $value) {
+        foreach ($value as $key2 => $value2) {
+            $idCliente=$value2;
+        }
+    }
+    $sql = "SELECT * FROM `fiesta` WHERE IdCliente LIKE $idCliente";
+    $vec = mysqli_query($c, $sql);
+        echo "<table class='table w-75 m-5 table-light table-bordered border-primary    border='1'> ";
+        echo "<tr class='table-danger'>";
+        echo "<th>IDFiesta </th>";
+        echo "<th>Fecha </th>";
+        echo "<th>Especialidad </th>";
+        echo "<th>Duracion </th>";
+        echo "<th> Tipo de fiesta</th>";
+        echo "<th>Numero  </th>";
+        echo "<th> Edad Media</th>";
+        echo "<th>Importe </th>";
+        echo "<th> IdCliente</th>";
+        echo "</tr>";
+    foreach ($vec as $key => $value) {
+            echo "<tr>";
+        foreach ($value as $key2 => $value2) {
+            
+            echo "<td class='table-info'> $value2 </td>";
+            
+             
+        }
+        echo "</tr>";
+    }
+    
+    echo "</table>";
+}
+
