@@ -9,9 +9,9 @@ if (isset($_GET['loginUsuario'])) {
 // if(isset($_GET['altaUsuario'])){
 //     altaUsuario();
 // }
-// if(isset($_GET['cerrarsesion'])){
-//     cerrarsesion();
-// }
+if(isset($_GET['cerrarsesion'])){
+    cerrarsesion();
+ }
 ?>
 <!DOCTYPE html>
 <html lang="es">

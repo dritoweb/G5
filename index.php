@@ -11,7 +11,7 @@ session_start();
     <meta name="author" content="" />
     <title>One Page Wonder - Start Bootstrap Template</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css"/>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -35,14 +35,8 @@ session_start();
                 ?>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item"><a class="nav-link" href="codigo/principal.php?crearbd">Crear BD</a></li>
-                        </ul>
-                        <ul class="navbar-nav ml-auto">
                             <li class="nav-item"><a class="nav-link" href="codigo/principal.php?delbd">Borar BD</a></li>
-                        </ul>
-                        <ul class="navbar-nav ml-auto">
                             <li class="nav-item"><a class="nav-link" href="formularios/altaAnimador.php">Alta Animador</a></li>
-                        </ul>
-                        <ul class="navbar-nav ml-auto">
                             <li class="nav-item"><a class="nav-link" href="formularios/bajaAnimador.php">Eliminar Animador</a></li>
                         </ul>
                         <div class="dropdown">
@@ -58,20 +52,24 @@ session_start();
 
                     <?php
                     } else {
-                        echo "Usuario";
+                        ?>
+                            <ul class="navbar-nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="codigo/principal.php?solicitarfiesta">Solicitar Fiesta</a></li>
+                            <li class="nav-item"><a class="nav-link" href="codigo/principal.php?consultarfiesta">Consultar mis fiestas</a></li>
+                        </ul>
+                        <?php
                     }
                     ?>
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="#">Cerrar sesion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="codigo/principal.php?cerrarsesion">Cerrar sesion</a></li>
                     </ul>
                 <?php
                 } else {
                 ?>
+                    
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="formularios/loginUsuario.php">SIGN UP</a></li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="formularios/altaUsuario.php">LOG IN</a></li>
+                        <li class="nav-item"><a class="nav-link" href="formularios/altaUsuario.php">SIGN UP</a></li>
+                        <li class="nav-item"><a class="nav-link" href="formularios/loginUsuario.php">LOG IN</a></li>
                     </ul>
                 <?php
                 }
@@ -81,6 +79,7 @@ session_start();
         </div>
     </nav>
     <header class="masthead text-center text-white">
+        
         <div class="masthead-content">
             <div class="container">
                 <h1 class="masthead-heading mb-0">One Page Wonder</h1>

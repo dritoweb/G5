@@ -35,7 +35,8 @@ function loginUsuario(&$mensaje)
             {
                 if("$nombre"=="$informacion")
                 {
-                    setcookie("nombre",$nombre,time()+3600,"/");
+                    $_SESSION["tipo"]="usuario";
+                    $_SESSION['nombre']="$nombre";
                     $mensaje="Sesion iniciada con $nombre";
                     $contador++;
                 }
@@ -52,7 +53,7 @@ function loginUsuario(&$mensaje)
 function cerrarsesion()
 {
     session_destroy();
-    header("Location: ../index.html");  
+    header("Location: ../index.php");  
 }
 
 function error($c, $num)        //Funcion para ver errores en funciones mysqli, para llamarla pasar coneccion y mysqli_errno($c)
