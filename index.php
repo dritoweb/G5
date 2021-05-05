@@ -11,6 +11,7 @@ session_start();
     <meta name="author" content="" />
     <title>One Page Wonder - Start Bootstrap Template</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="stylesheet" href="css/style.css">
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -41,7 +42,18 @@ session_start();
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item"><a class="nav-link" href="formularios/altaAnimador.php">Alta Animador</a></li>
                         </ul>
-                        
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="formularios/bajaAnimador.php">Eliminar Animador</a></li>
+                        </ul>
+
+                        <!-- <div class="dropdown">
+                            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="#home">Home</a>
+                                <a href="#about">About</a>
+                                <a href="#contact">Contact</a>
+                            </div>
+                        </div> -->
 
                     <?php
                     } else {

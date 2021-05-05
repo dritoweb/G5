@@ -118,7 +118,7 @@ function crearbd()
 
     //Crear trabla Animadores
     $tabla1 = "CREATE TABLE if not exists Animadores(   
-        IdAnimador VARCHAR(9) UNIQUE,
+        IdAnimador VARCHAR(9),
         NombreAnimador VARCHAR(35),
         Especialidad VARCHAR(20) PRIMARY KEY,
         precio INT
@@ -176,17 +176,16 @@ function crearbd()
 
 function AltaAnimador(){
     
-
-    if (isset($_POST['nombre']) AND isset($_POST['espec']) AND isset($_POST['precio'])) {
+    if (isset($_POST['dni']) AND ($_POST['nombre']) AND isset($_POST['espec']) AND isset($_POST['precio'])) {
         
         conectar($c);
         mysqli_select_db($c, "Feliz");
-        
+        $dni=$_POST['dni'];
         $nombre = $_POST['nombre'];
         $espec = $_POST['espec'];
         $precio = $_POST['precio'];
 
-        $sql = "INSERT INTO animadores(NombreAnimador, Especialidad, precio) VALUES('$nombre', '$espec', '$precio')";
+        $sql = "INSERT INTO animadores(IdAnimador, NombreAnimador, Especialidad, precio) VALUES('$dni', '$nombre', '$espec', '$precio')";
         if (mysqli_query($c, $sql)) {
             echo "Animador agregado";
         } else {
@@ -194,7 +193,15 @@ function AltaAnimador(){
         }
     }else{
         echo "Imposible añadir al animador, faltan datos";
-        
     }
 
+}
+
+function animadores2(&$vec)
+{
+    conectar($c);
+    mysqli_select_db($c, "feliz");
+
+    $sql = "SELECT CONCAT(NombreAnimador, ' - ', Especialidad) FROM animadores";
+    $vec = mysqli_query($c, $sql);
 }

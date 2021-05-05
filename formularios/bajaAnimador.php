@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("../codigo/funciones.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,25 +29,24 @@ session_start();
     <header class="masthead text-center text-white">
         <div class="masthead-content">
             <div class="container d-flex  flex-wrap justify-content-around ">
-                <h2 class="masthead-subheading mb-5 col-12 ">Alta Animador</h2>
+                <h2 class="masthead-subheading mb-5 col-12 ">Baja Animador</h2>
                 <form class="col-4" action="../codigo/principal.php?AltaAnimador" method="POST">
                     <div class="">
-                        <label for="exampleInputEmail1" class="form-label">DNI Animador</label>
-                        <input name="dni" class="form-control" id="nombre-cliente" placeholder="12345678A" aria-describedby="nombre-cliente">
-                    </div>
-                    <div class="">
                         <label for="exampleInputEmail1" class="form-label">Nombre Animador</label>
-                        <input name="nombre" class="form-control" id="nombre-cliente" placeholder="Indiana Jones" aria-describedby="nombre-cliente">
+                        <select require name="asiento" id="">
+                            <?php
+
+                            foreach ($vec as $key => $value) {
+                                foreach ($value as $key2 => $value2) {
+                                    echo "<option value='$value2'>Asiento $value2</option>";
+                                }
+                            }
+
+                            ?>
+                        </select>
                     </div>
-                    <div class="">
-                        <label for="exampleInputEmail1" class="form-label">Especialidad Animador</label>
-                        <input name="espec" class="form-control" id="nombre-cliente" placeholder="Globos" aria-describedby="nombre-cliente">
-                    </div>
-                    <div class="">
-                        <label for="exampleInputEmail1" class="form-label">Precio/hora</label>
-                        <input name="precio" class="form-control" id="nombre-cliente" placeholder="5000" aria-describedby="nombre-cliente">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Dar de alta</button>
+
+                    <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Eliminar</button>
                 </form>
             </div>
         </div>
