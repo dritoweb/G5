@@ -45,15 +45,16 @@ session_start();
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item"><a class="nav-link" href="formularios/bajaAnimador.php">Eliminar Animador</a></li>
                         </ul>
-
-                        <!-- <div class="dropdown">
-                            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-                            <div id="myDropdown" class="dropdown-content">
-                                <a href="#home">Home</a>
-                                <a href="#about">About</a>
-                                <a href="#contact">Contact</a>
+                        <div class="dropdown">
+                            <a class="btn dropdown nav-link text-white" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"  aria-expanded="false">
+                                Consultas
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item nav-link" href="codigo/principal.php?consultaespecialidad">Todas las especialidades</a>
+                                <a class="dropdown-item nav-link" href="codigo/principal.php?consultafiestas">Todas las fiestas</a>
+                                <a class="dropdown-item nav-link" href="#">Fiestas por clientes</a>
                             </div>
-                        </div> -->
+                        </div>
 
                     <?php
                     } else {

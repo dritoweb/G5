@@ -5,6 +5,7 @@ include("funciones.php");
 if (isset($_GET['loginUsuario'])) {
     loginUsuario($mensaje);
 }
+
 // if(isset($_GET['altaUsuario'])){
 //     altaUsuario();
 // }
@@ -48,6 +49,14 @@ if (isset($_GET['loginUsuario'])) {
         }elseif (isset($_GET['AltaAnimador'])){
             AltaAnimador();
         }
+        if (isset($_GET['consultaespecialidad'])){
+            consultaespecialidad();
+        }
+        if (isset($_GET['consultafiestas'])){
+            consultafiestas();
+        }
+        
+        
         ?>
     </header>
 

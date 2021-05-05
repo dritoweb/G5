@@ -205,3 +205,63 @@ function animadores2(&$vec)
     $sql = "SELECT CONCAT(NombreAnimador, ' - ', Especialidad) FROM animadores";
     $vec = mysqli_query($c, $sql);
 }
+
+function consultaespecialidad()
+{
+    conectar($c);
+    mysqli_select_db($c, "feliz");
+    $sql = mysqli_query($c, "SELECT Especialidad FROM animadores");
+
+    echo "<table class='table w-75 m-5 table-light table-bordered border-primary    border='1'> ";
+    echo "<tr class='table-danger'>";
+    echo "<th>Especialidad</th>";
+    echo "</tr>";
+
+    if ($sql) {
+        while ($registro = mysqli_fetch_row($sql)) {
+            echo "<tr>";
+            foreach ($registro  as $clave) {
+                echo "<td class='table-info'> $clave </td>";
+            }
+        }
+        echo "</table>";
+        
+    } else {
+        echo "No hay nungún dato.";
+    }
+    mysqli_close($c);
+    
+}
+
+function consultafiestas()
+{
+    conectar($c);
+    mysqli_select_db($c, "feliz");
+    $sql = mysqli_query($c, "SELECT * FROM fiesta");
+
+    echo "<table class='table w-75 m-5 table-light table-bordered border-primary    border='1'> ";
+    echo "<tr class='table-danger'>";
+    echo "<th>IDFiesta</th>";
+    echo "<th>Fecha</th>";
+    echo "<th>Especialidad </th>";
+    echo "<th>Duracion</th>";
+    echo "<th>Tipo de fiesta</th>";
+    echo "<th>Numero</th>";
+    echo "<th>Edad Media</th>";
+    echo "<th>Importe</th>";
+    echo "<th>IdCliente</th>";
+    echo "</tr>";
+    
+    if ($sql) {
+        while ($registro = mysqli_fetch_row($sql)) {
+            echo "<tr>";
+            foreach ($registro  as $clave) {
+                echo "<td class='table-info'> $clave </td>";
+            }
+        }
+        echo "</table>";
+    } else {
+        echo "No Records Found!";
+    }
+    mysqli_close($c);
+}
