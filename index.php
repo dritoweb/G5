@@ -33,11 +33,15 @@ session_start();
                     if ($_SESSION['tipo'] == "admin") {
                 ?>
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item"><a class="nav-link" href="#">Crear BD</a></li>
+                            <li class="nav-item"><a class="nav-link" href="codigo/principal.php?crearbd">Crear BD</a></li>
                         </ul>
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item"><a class="nav-link" href="#">Borar BD</a></li>
+                            <li class="nav-item"><a class="nav-link" href="codigo/principal.php?delbd">Borar BD</a></li>
                         </ul>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="formularios/altaAnimador.php">Alta Animador</a></li>
+                        </ul>
+                        
 
                     <?php
                     } else {

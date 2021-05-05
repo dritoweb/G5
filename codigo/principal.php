@@ -38,7 +38,16 @@ if (isset($_GET['loginUsuario'])) {
     ?>
     <header class="masthead text-center text-white">
         <?php
-        echo "$mensaje";
+        
+        if (isset($mensaje)) {
+            echo "$mensaje";
+        } elseif (isset($_GET['crearbd'])) {
+            crearbd();
+        }elseif (isset($_GET['delbd'])) {
+            deletebd();
+        }elseif (isset($_GET['AltaAnimador'])){
+            AltaAnimador();
+        }
         ?>
     </header>
 

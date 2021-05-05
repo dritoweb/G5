@@ -11,33 +11,23 @@ function loginUsuario(&$mensaje)
         if( $password == "123456")
         {
             $mensaje="Sesion iniciada con $nombre";
+            
             $_SESSION["tipo"]="admin";
-            setcookie("nombre",$nombre,time()+3600,"/");
+            $_SESSION['nombre']="Administrador";
+
             $contador++;
         }
         else
         {
-            $mensaje="Contraseña incorrecta, prueba con 123456";
-
+            $mensaje="Contraseña incorrecta";
         }
     }
     else
     {
-        $host = "localhost";
-        $usuar = "administrador";
-        $clave = "123456";
-        $mensaje="Sesion no iniciada";
-        if ($c = mysqli_connect($host, $usuar, $clave)) 
-        {
-            echo "vacio";
-        }
-        else 
-        {
-            echo "Imposible conectar";
-        }
-        $base="Feliz"; 
-        $tabla="Clientes"; 
-        mysqli_select_db($c, $base); 
+        conectar($c);
+
+        mysqli_select_db($c, "Feliz");
+
         $usuarios=mysqli_query($c, "SELECT NombreCliente FROM  Clientes");
         foreach($usuarios as $Columna=>$datos)
         {  
@@ -45,7 +35,6 @@ function loginUsuario(&$mensaje)
             {
                 if("$nombre"=="$informacion")
                 {
-                    $mensaje="$mensaje $informacion";
                     setcookie("nombre",$nombre,time()+3600,"/");
                     $mensaje="Sesion iniciada con $nombre";
                     $contador++;
@@ -57,15 +46,13 @@ function loginUsuario(&$mensaje)
             }
         }
     }
-    // header("Location: principal.php");   
+    header("refresh:3 url=../");
 }
 
 function cerrarsesion()
 {
     session_destroy();
-    setcookie("nombre","",time()-1,"/");
     header("Location: ../index.html");  
-
 }
 
 function error($c, $num)        //Funcion para ver errores en funciones mysqli, para llamarla pasar coneccion y mysqli_errno($c)
@@ -114,7 +101,7 @@ function deletebd()
     conectar($c);   //Coneccion con BD
     $sql = "DROP DATABASE IF EXISTS Feliz";
 
-    if (mysqli_query($c, $sql)) {
+    if (mysqli_query($c, $sql)) {   //Borrar BD
         echo "<br>Base de datos eliminada<br>";
     } else {
         error($c, mysqli_errno($c));
@@ -166,7 +153,7 @@ function crearbd()
     //Creaccion
     if (mysqli_query($c, $bd)) {
         echo "<br>Base de datos creada<br>";
-        mysqli_select_db($c, "Tragaperras");
+        mysqli_select_db($c, "Feliz");
         if (mysqli_query($c, $tabla1)) {
             echo "<br>Tabla1 Creada<br>";
             if (mysqli_query($c, $tabla2)) {
@@ -186,4 +173,28 @@ function crearbd()
         error($c, mysqli_errno($c));
     }
 }
-?>
+
+function AltaAnimador(){
+    
+
+    if (isset($_POST['nombre']) AND isset($_POST['espec']) AND isset($_POST['precio'])) {
+        
+        conectar($c);
+        mysqli_select_db($c, "Feliz");
+        
+        $nombre = $_POST['nombre'];
+        $espec = $_POST['espec'];
+        $precio = $_POST['precio'];
+
+        $sql = "INSERT INTO animadores(NombreAnimador, Especialidad, precio) VALUES('$nombre', '$espec', '$precio')";
+        if (mysqli_query($c, $sql)) {
+            echo "Animador agregado";
+        } else {
+            error($c, mysqli_errno($c));
+        }
+    }else{
+        echo "Imposible añadir al animador, faltan datos";
+        
+    }
+
+}
