@@ -52,12 +52,14 @@ if(isset($_GET['cerrarsesion'])){
         if (isset($_GET['consultaespecialidad'])){
             consultaespecialidad();
         }
-        if (isset($_GET['consultafiestas'])){
+        if (isset($_GET['consultarfiesta'])){
             consultafiestas();
         }elseif (isset($_GET['altaUsuario'])){
             altaUsuario();
-        }elseif (isset($_GET['consultarfiesta'])){
-            consultafiestas();
+        }elseif (isset($_GET['SoliFiesta'])){
+            SoliFiesta();
+        }elseif (isset($_GET['aceptar'])){
+            aceptar();
         }
         
         
