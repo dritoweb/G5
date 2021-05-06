@@ -49,7 +49,7 @@ function error($c, $num)        //Funcion para ver errores en funciones mysqli, 
 {
     $vec["1064"] = "<br>Error de sintaxis<br>";
     $vec['1046'] = "<br>Base de datos no seleccionada<br>";
-    $vec['1062'] = "<br>Este usuario ya existe<br>";
+    $vec['1062'] = "<br>Este registro ya existe<br>";
     $vec['1146'] = "<br>Esta tabla no existe<br>";
     $vec['1054'] = "<br>Falta algun campo en las tablas<br>";
     $vec['1452'] = "<br>Clave externa desconocida<br>";
@@ -126,7 +126,7 @@ function crearbd()
 
     //Crear tabla Fiesta
     $tabla3 = "CREATE TABLE IF NOT EXISTS Fiesta(
-        IdFiesta INT,
+        IdFiesta INT AUTO_INCREMENT ,
         fecha DATE,
         Especialidad VARCHAR(20),
         Duracion INT,
@@ -327,8 +327,6 @@ function aceptar(){
     $edad = $vec['edad'];
     $id=$vec['usuario'];
     $importe = $vec['presupuesto'];
-
-    echo $_SESSION['id'];
 
     conectar($c);
     mysqli_select_db($c, "feliz");

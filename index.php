@@ -52,7 +52,7 @@ session_start();
                             <div class="dropdown-menu">
                                 <a class="nav-link" href="codigo/principal.php?consultaespecialidad">Todas las especialidades</a>
                                 <a class=" nav-link" href="codigo/principal.php?consultafiestas">Todas las fiestas</a>
-                                <a class=" nav-link" href="#">Fiestas por clientes</a>
+                                <a class=" git" href="#">Fiestas por clientes</a>
                             </div>
                         </div>
 
