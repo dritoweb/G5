@@ -54,6 +54,8 @@ if(isset($_GET['cerrarsesion'])){
         }
         if (isset($_GET['consultafiestas'])){
             consultafiestas();
+        }elseif (isset($_GET['altaUsuario'])){
+            altaUsuario();
         }
         
         

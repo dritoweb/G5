@@ -266,3 +266,23 @@ function consultafiestas()
     }
     mysqli_close($c);
 }
+
+function altaUsuario(){
+    
+    conectar($c);
+    mysqli_select_db($c, "feliz");
+    $dni=$_POST['dni'];
+    $nombre=$_POST['nombre'];
+    $email=$_POST['email'];
+    $contra=$_POST['password'];
+    $direccion = $_POST['direccion'];
+    
+    $sql ="INSERT INTO Clientes(IdCliente, NombreCliente, email, Contraseña, direccion) value('$dni','$nombre','$email', '$contra', '$direccion')";
+
+    if (mysqli_query($c, $sql)) {
+        echo "Cliente añadido";
+    }else {
+        error($c, mysqli_errno($c));    
+    }
+
+}
