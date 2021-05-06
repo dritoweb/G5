@@ -34,16 +34,16 @@ include("../codigo/funciones.php");
                 <form class="col-4" action="../codigo/principal.php?SoliFiesta" method="POST">
                     <div class="">
                         <label for="exampleInputEmail1" class="form-label">Fecha</label>
-                        <input name="fecha" class="form-control" id="nombre-cliente" placeholder="02-04-2000" aria-describedby="nombre-cliente">
+                        <input name="fecha" class="form-control" id="nombre-cliente" placeholder="2020-25-04" aria-describedby="nombre-cliente">
                     </div>
                     <div class="">
                     <label for="exampleInputEmail1" class="form-label">Animador</label><br>
-                    <select require name="animador" id="">
+                    <select class='form-control '  require name="animador" id="">
                             <?php
                             
                             foreach ($vec as $key => $value) {
                                 foreach ($value as $key2 => $value2) {
-                                    echo "<option value='$value2'>$value2</option>";
+                                    echo "<option  value='$value2'>$value2</option>";
                                 }
                             }
 
@@ -52,7 +52,7 @@ include("../codigo/funciones.php");
                     </div>
                     <div class="">
                         <label for="exampleInputEmail1" class="form-label">Duracion</label>
-                        <input name="duracion" class="form-control" id="nombre-cliente" placeholder="" aria-describedby="nombre-cliente">
+                        <input name="duracion" class="form-control" id="nombre-cliente" placeholder="Horas" aria-describedby="nombre-cliente">
                     </div>
                     <div class="">
                         <label for="exampleInputEmail1" class="form-label">tipo De fiesta</label>
