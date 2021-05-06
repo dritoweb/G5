@@ -2,58 +2,47 @@
 
 function loginUsuario(&$mensaje)
 {
-    $nombre=$_POST["nombre"];
-    $password=$_POST["password"];
-    $mensaje="";
-    $contador=0;
-    if($nombre == "administrador")
-    {
-        if( $password == "123456")
-        {
-            $mensaje="Sesion iniciada con $nombre";
-            
-            $_SESSION["tipo"]="admin";
-            $_SESSION['nombre']="Administrador";
+    $nombre = $_POST["nombre"];
+    $password = $_POST["password"];
+    $mensaje = "";
+    $contador = 0;
+    if ($nombre == "administrador") {
+        if ($password == "123456") {
+            $mensaje = "Sesion iniciada con $nombre";
+
+            $_SESSION["tipo"] = "admin";
+            $_SESSION['nombre'] = "Administrador";
 
             $contador++;
+        } else {
+            $mensaje = "Contraseña incorrecta";
         }
-        else
-        {
-            $mensaje="Contraseña incorrecta";
-        }
-    }
-    else
-    {
+    } else {
         conectar($c);
 
         mysqli_select_db($c, "Feliz");
 
-        $usuarios=mysqli_query($c, "SELECT NombreCliente FROM  Clientes");
-        foreach($usuarios as $Columna=>$datos)
-        {  
-            foreach($datos as $dato=>$informacion)
-            {
-                if("$nombre"=="$informacion")
-                {
-                    $_SESSION["tipo"]="usuario";
-                    $_SESSION['nombre']="$nombre";
-                    $mensaje="Sesion iniciada con $nombre";
+        $usuarios = mysqli_query($c, "SELECT NombreCliente FROM  Clientes");
+        foreach ($usuarios as $Columna => $datos) {
+            foreach ($datos as $dato => $informacion) {
+                if ("$nombre" == "$informacion") {
+                    $_SESSION["tipo"] = "usuario";
+                    $_SESSION['nombre'] = "$nombre";
+                    $mensaje = "Sesion iniciada con $nombre";
                     $contador++;
-                }
-                else
-                {
-                    $mensaje="El usuario $nombre no existe";
+                } else {
+                    $mensaje = "El usuario $nombre no existe";
                 }
             }
         }
     }
-    header("refresh:3 url=../");
+    header("location:../");
 }
 
 function cerrarsesion()
 {
     session_destroy();
-    header("Location: ../index.php");  
+    header("Location: ../index.php");
 }
 
 function error($c, $num)        //Funcion para ver errores en funciones mysqli, para llamarla pasar coneccion y mysqli_errno($c)
@@ -62,7 +51,8 @@ function error($c, $num)        //Funcion para ver errores en funciones mysqli, 
     $vec['1046'] = "<br>Base de datos no seleccionada<br>";
     $vec['1062'] = "<br>Este usuario ya existe<br>";
     $vec['1146'] = "<br>Esta tabla no existe<br>";
-    $vec['1054'] = "<br>Falta algun campo en las tablas";
+    $vec['1054'] = "<br>Falta algun campo en las tablas<br>";
+    $vec['1452'] = "<br>Clave externa desconocida<br>";
 
     if (isset($vec[$num])) {
         echo $vec[$num];
@@ -175,13 +165,14 @@ function crearbd()
     }
 }
 
-function AltaAnimador(){
-    
-    if (isset($_POST['dni']) AND ($_POST['nombre']) AND isset($_POST['espec']) AND isset($_POST['precio'])) {
-        
+function AltaAnimador()
+{
+
+    if (isset($_POST['dni']) and ($_POST['nombre']) and isset($_POST['espec']) and isset($_POST['precio'])) {
+
         conectar($c);
         mysqli_select_db($c, "Feliz");
-        $dni=$_POST['dni'];
+        $dni = $_POST['dni'];
         $nombre = $_POST['nombre'];
         $espec = $_POST['espec'];
         $precio = $_POST['precio'];
@@ -192,10 +183,9 @@ function AltaAnimador(){
         } else {
             error($c, mysqli_errno($c));
         }
-    }else{
+    } else {
         echo "Imposible añadir al animador, faltan datos";
     }
-
 }
 
 function animadores2(&$vec)
@@ -226,20 +216,18 @@ function consultaespecialidad()
             }
         }
         echo "</table>";
-        
     } else {
         echo "No hay nungún dato.";
     }
     mysqli_close($c);
-    
 }
 
 function consultafiestas()
 {
     if (isset($_POST['dni'])) {
-        $dni=$_POST['dni'];
-    }else {
-        $dni="%";
+        $dni = $_POST['dni'];
+    } else {
+        $dni = "%";
     }
 
     conectar($c);
@@ -258,7 +246,7 @@ function consultafiestas()
     echo "<th>Importe</th>";
     echo "<th>IdCliente</th>";
     echo "</tr>";
-    
+
     if ($sql) {
         while ($registro = mysqli_fetch_row($sql)) {
             echo "<tr>";
@@ -273,21 +261,92 @@ function consultafiestas()
     mysqli_close($c);
 }
 
-function altaUsuario(){
-    
+function altaUsuario()
+{
+
     conectar($c);
     mysqli_select_db($c, "feliz");
-    $nombre=$_POST['nombre'];
-    $email=$_POST['email'];
-    $contra=$_POST['password'];
+    $nombre = $_POST['nombre'];
+    $email = $_POST['email'];
+    $contra = $_POST['password'];
     $direccion = $_POST['direccion'];
-    
-    $sql ="INSERT INTO Clientes(NombreCliente, email, Contraseña, direccion) value('$nombre','$email', '$contra', '$direccion')";
+
+    $sql = "INSERT INTO Clientes(NombreCliente, email, Contraseña, direccion) value('$nombre','$email', '$contra', '$direccion')";
 
     if (mysqli_query($c, $sql)) {
         echo "Cliente añadido";
-    }else {
-        error($c, mysqli_errno($c));    
+    } else {
+        error($c, mysqli_errno($c));
+    }
+}
+
+function SoliFiesta()
+{
+    $vec['fecha'] = $_POST["fecha"];
+    $animador = $_POST["animador"];
+    $vec['animador'] = $_POST['animador'];
+    $tiempo = $_POST['duracion'];
+    $vec['duracion'] = $_POST['duracion'];
+    $vec['tipo'] = $_POST['tipo'];
+    $vec['Asistentes'] = $_POST['Asistentes'];
+    $vec['edad'] = $_POST['edad'];
+    $vec['usuario'] = $_SESSION['nombre'];
+    
+
+    conectar($c);
+    mysqli_select_db($c, "feliz");
+
+    $sql = "SELECT precio FROM animadores where especialidad LIKE '$animador'";
+
+    $result = mysqli_query($c, $sql);
+
+    foreach ($result as $key => $value) {
+
+        echo "<h1>El precio total de la fiesta es de: " . $value['precio'] * $tiempo . " €</h1>";
+        $vec["presupuesto"] = $value['precio'] * $tiempo;
+    }
+    $_SESSION['fiesta'] = $vec;
+
+?>
+    <form action="../codigo/principal.php?aceptar" method="post">
+        <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Aceptar presupuesto</button>
+    </form>
+<?php
+
+}
+
+
+function aceptar(){
+    $vec=$_SESSION["fiesta"];
+
+    $fecha=$vec['fecha'];
+    $especialidad=$vec['animador'];
+    $duracion=$vec['duracion'];
+    $tipo=$vec['tipo'];
+    $numero=$vec['Asistentes'];
+    $edad = $vec['edad'];
+    $id=$vec['usuario'];
+    $importe = $vec['presupuesto'];
+
+    echo $_SESSION['id'];
+
+    conectar($c);
+    mysqli_select_db($c, "feliz");
+    
+
+    $sql2="SELECT idcliente FROM clientes WHERE nombreCliente LIKE '$id'";
+
+    if ($vec=mysqli_query($c, $sql2)) {
+        foreach ($vec as $key => $value) {
+            $id =  $value['idcliente'];
+        }
     }
 
+    $sql = "INSERT INTO fiesta(fecha, Especialidad, Duracion, TipoDeFiesta, Numero, EdadMedia, Importe, IdCliente) VALUES('$fecha', '$especialidad', '$duracion', '$tipo', '$numero', '$edad','$importe' , '$id')";
+
+    if (mysqli_query($c, $sql)) {
+        echo "Fiesta Añadida";
+    }else {
+        error($c, mysqli_errno($c));
+    }
 }

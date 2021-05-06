@@ -31,14 +31,14 @@ include("../codigo/funciones.php");
         <div class="masthead-content">
             <div class="container d-flex  flex-wrap justify-content-around ">
                 <h2 class="masthead-subheading mb-5 col-12 ">Alta Animador</h2>
-                <form class="col-4" action="../codigo/principal.php?AltaAnimador" method="POST">
+                <form class="col-4" action="../codigo/principal.php?SoliFiesta" method="POST">
                     <div class="">
                         <label for="exampleInputEmail1" class="form-label">Fecha</label>
-                        <input name="fecha" class="form-control" id="nombre-cliente" placeholder="12345678A" aria-describedby="nombre-cliente">
+                        <input name="fecha" class="form-control" id="nombre-cliente" placeholder="02-04-2000" aria-describedby="nombre-cliente">
                     </div>
                     <div class="">
                     <label for="exampleInputEmail1" class="form-label">Animador</label><br>
-                    <select require name="asiento" id="">
+                    <select require name="animador" id="">
                             <?php
                             
                             foreach ($vec as $key => $value) {
@@ -52,19 +52,19 @@ include("../codigo/funciones.php");
                     </div>
                     <div class="">
                         <label for="exampleInputEmail1" class="form-label">Duracion</label>
-                        <input name="dni" class="form-control" id="nombre-cliente" placeholder="" aria-describedby="nombre-cliente">
+                        <input name="duracion" class="form-control" id="nombre-cliente" placeholder="" aria-describedby="nombre-cliente">
                     </div>
                     <div class="">
                         <label for="exampleInputEmail1" class="form-label">tipo De fiesta</label>
-                        <input name="dni" class="form-control" id="nombre-cliente" placeholder="Fiesta de ..." aria-describedby="nombre-cliente">
+                        <input name="tipo" class="form-control" id="nombre-cliente" placeholder="Fiesta de ..." aria-describedby="nombre-cliente">
                     </div>
                     <div class="">
                         <label for="exampleInputEmail1" class="form-label">Asistentes</label>
-                        <input name="dni" class="form-control" id="nombre-cliente" placeholder="6" aria-describedby="nombre-cliente">
+                        <input name="Asistentes" class="form-control" id="nombre-cliente" placeholder="6" aria-describedby="nombre-cliente">
                     </div>
                     <div class="">
                         <label for="exampleInputEmail1" class="form-label">Edad media</label>
-                        <input name="dni" class="form-control" id="nombre-cliente" placeholder="20" aria-describedby="nombre-cliente">
+                        <input name="edad" class="form-control" id="nombre-cliente" placeholder="20" aria-describedby="nombre-cliente">
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Dar de alta</button>
