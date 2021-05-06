@@ -203,7 +203,7 @@ function animadores2(&$vec)
     conectar($c);
     mysqli_select_db($c, "feliz");
 
-    $sql = "SELECT CONCAT(NombreAnimador, ' - ', Especialidad) FROM animadores";
+    $sql = "SELECT Especialidad FROM animadores";
     $vec = mysqli_query($c, $sql);
 }
 
@@ -236,9 +236,15 @@ function consultaespecialidad()
 
 function consultafiestas()
 {
+    if (isset($_POST['dni'])) {
+        $dni=$_POST['dni'];
+    }else {
+        $dni="%";
+    }
+
     conectar($c);
     mysqli_select_db($c, "feliz");
-    $sql = mysqli_query($c, "SELECT * FROM fiesta");
+    $sql = mysqli_query($c, "SELECT * FROM fiesta WHERE idcliente LIKE '$dni'");
 
     echo "<table class='table w-75 m-5 table-light table-bordered border-primary    border='1'> ";
     echo "<tr class='table-danger'>";
@@ -271,13 +277,12 @@ function altaUsuario(){
     
     conectar($c);
     mysqli_select_db($c, "feliz");
-    $dni=$_POST['dni'];
     $nombre=$_POST['nombre'];
     $email=$_POST['email'];
     $contra=$_POST['password'];
     $direccion = $_POST['direccion'];
     
-    $sql ="INSERT INTO Clientes(IdCliente, NombreCliente, email, Contraseña, direccion) value('$dni','$nombre','$email', '$contra', '$direccion')";
+    $sql ="INSERT INTO Clientes(NombreCliente, email, Contraseña, direccion) value('$nombre','$email', '$contra', '$direccion')";
 
     if (mysqli_query($c, $sql)) {
         echo "Cliente añadido";

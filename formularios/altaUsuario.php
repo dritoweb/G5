@@ -31,10 +31,6 @@ session_start();
                 <h2 class="masthead-subheading mb-5 col-12 ">Registro</h2>
                 <form class="col-4" action="../codigo/principal.php?altaUsuario" method="POST">
                     <div class="">
-                        <label for="exampleInputEmail1" class="form-label">Dni Cliente</label>
-                        <input type="nombre" name="dni" class="form-control" id="nombre-cliente" placeholder="12345678A" aria-describedby="nombre-cliente">
-                    </div>
-                    <div class="">
                         <label for="exampleInputEmail1" class="form-label">Nombre Cliente</label>
                         <input type="nombre" name="nombre" class="form-control" id="nombre-cliente" placeholder="Indiana Jones" aria-describedby="nombre-cliente">
                     </div>

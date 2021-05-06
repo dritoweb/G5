@@ -54,7 +54,7 @@ session_start();
                     } else {
                         ?>
                             <ul class="navbar-nav ml-auto">
-                            <li class="nav-item"><a class="nav-link" href="codigo/principal.php?solicitarfiesta">Solicitar Fiesta</a></li>
+                            <li class="nav-item"><a class="nav-link" href="formularios/SolicitarFiesta.php">Solicitar Fiesta</a></li>
                             <li class="nav-item"><a class="nav-link" href="codigo/principal.php?consultarfiesta">Consultar mis fiestas</a></li>
                         </ul>
                         <?php

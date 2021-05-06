@@ -25,17 +25,22 @@ include("../codigo/funciones.php");
     <!-- Navigation-->
     <?php
     include("header.php");
+    animadores2($vec);
     ?>
     <header class="masthead text-center text-white">
         <div class="masthead-content">
             <div class="container d-flex  flex-wrap justify-content-around ">
-                <h2 class="masthead-subheading mb-5 col-12 ">Baja Animador</h2>
+                <h2 class="masthead-subheading mb-5 col-12 ">Alta Animador</h2>
                 <form class="col-4" action="../codigo/principal.php?AltaAnimador" method="POST">
                     <div class="">
-                        <label for="exampleInputEmail1" class="form-label">Nombre Animador</label>
-                        <select require name="asiento" id="">
+                        <label for="exampleInputEmail1" class="form-label">Fecha</label>
+                        <input name="fecha" class="form-control" id="nombre-cliente" placeholder="12345678A" aria-describedby="nombre-cliente">
+                    </div>
+                    <div class="">
+                    <label for="exampleInputEmail1" class="form-label">Animador</label><br>
+                    <select require name="asiento" id="">
                             <?php
-                            animadores2($vec);
+                            
                             foreach ($vec as $key => $value) {
                                 foreach ($value as $key2 => $value2) {
                                     echo "<option value='$value2'>$value2</option>";
@@ -45,8 +50,24 @@ include("../codigo/funciones.php");
                             ?>
                         </select>
                     </div>
+                    <div class="">
+                        <label for="exampleInputEmail1" class="form-label">Duracion</label>
+                        <input name="dni" class="form-control" id="nombre-cliente" placeholder="" aria-describedby="nombre-cliente">
+                    </div>
+                    <div class="">
+                        <label for="exampleInputEmail1" class="form-label">tipo De fiesta</label>
+                        <input name="dni" class="form-control" id="nombre-cliente" placeholder="Fiesta de ..." aria-describedby="nombre-cliente">
+                    </div>
+                    <div class="">
+                        <label for="exampleInputEmail1" class="form-label">Asistentes</label>
+                        <input name="dni" class="form-control" id="nombre-cliente" placeholder="6" aria-describedby="nombre-cliente">
+                    </div>
+                    <div class="">
+                        <label for="exampleInputEmail1" class="form-label">Edad media</label>
+                        <input name="dni" class="form-control" id="nombre-cliente" placeholder="20" aria-describedby="nombre-cliente">
+                    </div>
 
-                    <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Eliminar</button>
+                    <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Dar de alta</button>
                 </form>
             </div>
         </div>

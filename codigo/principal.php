@@ -11,7 +11,7 @@ if (isset($_GET['loginUsuario'])) {
 // }
 if(isset($_GET['cerrarsesion'])){
     cerrarsesion();
- }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -56,6 +56,8 @@ if(isset($_GET['cerrarsesion'])){
             consultafiestas();
         }elseif (isset($_GET['altaUsuario'])){
             altaUsuario();
+        }elseif (isset($_GET['consultarfiesta'])){
+            consultafiestas();
         }
         
         
