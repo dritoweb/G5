@@ -2,10 +2,13 @@
 
 function loginUsuario(&$mensaje)
 {
+    //Datos del usuario/admin
     $nombre = $_POST["nombre"];
     $password = $_POST["password"];
     $mensaje = "";
     $contador = 0;
+
+    //Es admin?
     if ($nombre == "administrador") {
         if ($password == "123456") {
             $mensaje = "Sesion iniciada con $nombre";
@@ -17,6 +20,7 @@ function loginUsuario(&$mensaje)
         } else {
             $mensaje = "Contraseña incorrecta";
         }
+        //Es usuario?
     } else {
         conectar($c);
 
@@ -31,6 +35,7 @@ function loginUsuario(&$mensaje)
                     $mensaje = "Sesion iniciada con $nombre";
                     $contador++;
                 } else {
+                    //No hay usuario
                     $mensaje = "El usuario $nombre no existe";
                 }
             }
@@ -45,15 +50,18 @@ function cerrarsesion()
     header("Location: ../index.php");
 }
 
-function error($c, $num)        //Funcion para ver errores en funciones mysqli, para llamarla pasar coneccion y mysqli_errno($c)
-{
-    $vec["1064"] = "<br>Error de sintaxis<br>";
+function error($c, $num)        
+{//Funcion para ver errores en funciones mysqli,
+ //para llamarla pasar coneccion y mysqli_errno($c)
+
     $vec['1046'] = "<br>Base de datos no seleccionada<br>";
-    $vec['1062'] = "<br>Este registro ya existe<br>";
-    $vec['1146'] = "<br>Esta tabla no existe<br>";
     $vec['1054'] = "<br>Falta algun campo en las tablas<br>";
+    $vec['1062'] = "<br>Este registro ya existe<br>";
+    $vec["1064"] = "<br>Error de sintaxis<br>";
+    $vec['1146'] = "<br>Esta tabla no existe<br>";
     $vec['1452'] = "<br>Clave externa desconocida<br>";
 
+    //tipo de error
     if (isset($vec[$num])) {
         echo $vec[$num];
     } else {
@@ -166,10 +174,10 @@ function crearbd()
 }
 
 function AltaAnimador()
-{
+{//Registrar animador
 
     if (isset($_POST['dni']) and ($_POST['nombre']) and isset($_POST['espec']) and isset($_POST['precio'])) {
-
+        //todo relleno
         conectar($c);
         mysqli_select_db($c, "Feliz");
         $dni = $_POST['dni'];
@@ -177,6 +185,7 @@ function AltaAnimador()
         $espec = $_POST['espec'];
         $precio = $_POST['precio'];
 
+        //mysqli
         $sql = "INSERT INTO animadores(IdAnimador, NombreAnimador, Especialidad, precio) VALUES('$dni', '$nombre', '$espec', '$precio')";
         if (mysqli_query($c, $sql)) {
             echo "Animador agregado";
@@ -184,12 +193,14 @@ function AltaAnimador()
             error($c, mysqli_errno($c));
         }
     } else {
+        //No se puede añadir porque faltan datos
         echo "Imposible añadir al animador, faltan datos";
     }
 }
 
 function animadores2(&$vec)
 {
+    //listado de todos los animadores
     conectar($c);
     mysqli_select_db($c, "feliz");
 
@@ -203,12 +214,13 @@ function consultaespecialidad()
     mysqli_select_db($c, "feliz");
     $sql = mysqli_query($c, "SELECT Especialidad FROM animadores");
 
+    //Tabla HTML
     echo "<table class='table w-75 m-5 table-light table-bordered border-primary    border='1'> ";
     echo "<tr class='table-danger'>";
     echo "<th>Especialidad</th>";
     echo "</tr>";
 
-    if ($sql) {
+    if ($sql) {//registros de la tabla
         while ($registro = mysqli_fetch_row($sql)) {
             echo "<tr>";
             foreach ($registro  as $clave) {
@@ -224,9 +236,12 @@ function consultaespecialidad()
 
 function consultafiestas()
 {
+    //mostrar fiestas
     if (isset($_POST['dni'])) {
+        //hay $_POST['dni']
         $dni = $_POST['dni'];
     } else {
+        //Todas las fiestass
         $dni = "%";
     }
 
@@ -234,6 +249,7 @@ function consultafiestas()
     mysqli_select_db($c, "feliz");
     $sql = mysqli_query($c, "SELECT * FROM fiesta WHERE idcliente LIKE '$dni'");
 
+    //tabla HTML
     echo "<table class='table w-75 m-5 table-light table-bordered border-primary    border='1'> ";
     echo "<tr class='table-danger'>";
     echo "<th>IDFiesta</th>";
@@ -247,6 +263,7 @@ function consultafiestas()
     echo "<th>IdCliente</th>";
     echo "</tr>";
 
+    //Mysqli
     if ($sql) {
         while ($registro = mysqli_fetch_row($sql)) {
             echo "<tr>";
@@ -263,7 +280,7 @@ function consultafiestas()
 
 function altaUsuario()
 {
-
+    //Registro de usuarios
     conectar($c);
     mysqli_select_db($c, "feliz");
     $nombre = $_POST['nombre'];
@@ -271,8 +288,10 @@ function altaUsuario()
     $contra = $_POST['password'];
     $direccion = $_POST['direccion'];
 
+    //Añadir
     $sql = "INSERT INTO Clientes(NombreCliente, email, Contraseña, direccion) value('$nombre','$email', '$contra', '$direccion')";
 
+    //resultado
     if (mysqli_query($c, $sql)) {
         echo "Cliente añadido";
     } else {
@@ -282,6 +301,9 @@ function altaUsuario()
 
 function SoliFiesta()
 {
+    //pedir fiestas
+
+    //Datos del formulario
     $vec['fecha'] = $_POST["fecha"];
     $animador = $_POST["animador"];
     $vec['animador'] = $_POST['animador'];
@@ -292,7 +314,7 @@ function SoliFiesta()
     $vec['edad'] = $_POST['edad'];
     $vec['usuario'] = $_SESSION['nombre'];
     
-
+    //Mysqli
     conectar($c);
     mysqli_select_db($c, "feliz");
 
@@ -302,9 +324,10 @@ function SoliFiesta()
 
     foreach ($result as $key => $value) {
 
-        echo "<h1>El precio total de la fiesta es de: " . $value['precio'] * $tiempo . " €</h1>";
-        $vec["presupuesto"] = $value['precio'] * $tiempo;
+        echo "<h1>El precio total de la fiesta es de: " . ($value['precio'] * $tiempo)+200 . " €</h1>";
+        $vec["presupuesto"] = ($value['precio'] * $tiempo)+200;
     }
+    //Presupuesto de la fiesta
     $_SESSION['fiesta'] = $vec;
 
 ?>
@@ -317,6 +340,8 @@ function SoliFiesta()
 
 
 function aceptar(){
+
+    //Aceptar presupuesta
     $vec=$_SESSION["fiesta"];
 
     $fecha=$vec['fecha'];
@@ -328,10 +353,10 @@ function aceptar(){
     $id=$vec['usuario'];
     $importe = $vec['presupuesto'];
 
+    //Mysqli
     conectar($c);
     mysqli_select_db($c, "feliz");
     
-
     $sql2="SELECT idcliente FROM clientes WHERE nombreCliente LIKE '$id'";
 
     if ($vec=mysqli_query($c, $sql2)) {
