@@ -323,9 +323,9 @@ function SoliFiesta()
     $result = mysqli_query($c, $sql);
 
     foreach ($result as $key => $value) {
-
-        echo "<h1>El precio total de la fiesta es de: " . ($value['precio'] * $tiempo)+200 . " €</h1>";
-        $vec["presupuesto"] = ($value['precio'] * $tiempo)+200;
+        $total=$value['precio'] * $tiempo +200;
+        echo "<h1>El precio total de la fiesta es de: " . $total . " €</h1>";
+        $vec["presupuesto"] = $total;
     }
     //Presupuesto de la fiesta
     $_SESSION['fiesta'] = $vec;
