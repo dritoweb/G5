@@ -134,7 +134,7 @@ function crearbd()
 
     //Crear tabla Fiesta
     $tabla3 = "CREATE TABLE IF NOT EXISTS Fiesta(
-        IdFiesta INT AUTO_INCREMENT ,
+        IdFiesta INT,
         fecha DATE,
         Especialidad VARCHAR(20),
         Duracion INT,
@@ -365,7 +365,14 @@ function aceptar(){
         }
     }
 
-    $sql = "INSERT INTO fiesta(fecha, Especialidad, Duracion, TipoDeFiesta, Numero, EdadMedia, Importe, IdCliente) VALUES('$fecha', '$especialidad', '$duracion', '$tipo', '$numero', '$edad','$importe' , '$id')";
+    $sql3="SELECT IFNULL(max(idfiesta),0) 'Total' from fiesta";
+    $num = mysqli_query($c,$sql3);
+
+    foreach ($num as $key => $value) {
+        $total = $value["Total"]+1;
+    }
+
+    $sql = "INSERT INTO fiesta(IdFiesta, fecha, Especialidad, Duracion, TipoDeFiesta, Numero, EdadMedia, Importe, IdCliente) VALUES('$total', '$fecha', '$especialidad', '$duracion', '$tipo', '$numero', '$edad','$importe' , '$id')";
 
     if (mysqli_query($c, $sql)) {
         echo "Fiesta Añadida";
